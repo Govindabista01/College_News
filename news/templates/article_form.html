@@ -1,0 +1,299 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}{{ action }} Article - College News Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-10 mx-auto">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-gradient mb-3">
+                <i class="fas fa-edit text-primary me-3"></i>
+                {{ action }} Article
+            </h1>
+            <p class="lead text-muted">Create engaging content for your readers</p>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-file-alt me-2"></i>Article Details
+                </h4>
+            </div>
+            <div class="card-body p-4">
+                <form method="post" enctype="multipart/form-data" id="articleForm">
+                    {% csrf_token %}
+                    
+                    <div class="row g-4">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="{{ form.title.id_for_label }}" class="form-label fw-bold">
+                                    <i class="fas fa-heading me-2"></i>Title *
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-pen"></i>
+                                    </span>
+                                    {{ form.title }}
+                                </div>
+                                {% if form.title.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.title.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="{{ form.category.id_for_label }}" class="form-label fw-bold">
+                                    <i class="fas fa-tag me-2"></i>Category *
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-folder"></i>
+                                    </span>
+                                    {{ form.category }}
+                                </div>
+                                {% if form.category.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.category.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="{{ form.excerpt.id_for_label }}" class="form-label fw-bold">
+                            <i class="fas fa-quote-left me-2"></i>Excerpt
+                        </label>
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-align-left"></i>
+                            </span>
+                            {{ form.excerpt }}
+                        </div>
+                        <div class="form-text">
+                            <i class="fas fa-info-circle me-1"></i>A brief summary of the article (optional)
+                        </div>
+                        {% if form.excerpt.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.excerpt.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-group mt-4">
+                        <label for="{{ form.content.id_for_label }}" class="form-label fw-bold">
+                            <i class="fas fa-file-text me-2"></i>Content *
+                        </label>
+                        <div class="content-editor-wrapper">
+                            {{ form.content }}
+                        </div>
+                        {% if form.content.errors %}
+                            <div class="text-danger small mt-1">
+                                {{ form.content.errors.0 }}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row g-4 mt-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="{{ form.status.id_for_label }}" class="form-label fw-bold">
+                                    <i class="fas fa-toggle-on me-2"></i>Status
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-eye"></i>
+                                    </span>
+                                    {{ form.status }}
+                                </div>
+                                {% if form.status.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.status.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="{{ form.featured_image.id_for_label }}" class="form-label fw-bold">
+                                    <i class="fas fa-image me-2"></i>Featured Image
+                                </label>
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        <i class="fas fa-upload"></i>
+                                    </span>
+                                    {{ form.featured_image }}
+                                </div>
+                                <div class="form-text">
+                                    <i class="fas fa-info-circle me-1"></i>Recommended size: 1200x630px
+                                </div>
+                                {% if form.featured_image.errors %}
+                                    <div class="text-danger small mt-1">
+                                        {{ form.featured_image.errors.0 }}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions mt-5 pt-4 border-top">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'article_list' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-arrow-left me-2"></i>Cancel
+                            </a>
+                            <div>
+                                <button type="button" class="btn btn-outline-info me-2" onclick="previewArticle()">
+                                    <i class="fas fa-eye me-2"></i>Preview
+                                </button>
+                                <button type="submit" class="btn btn-primary">
+                                    {% if action == 'Create' %}
+                                        <i class="fas fa-plus me-2"></i>Create Article
+                                    {% else %}
+                                        <i class="fas fa-save me-2"></i>Update Article
+                                    {% endif %}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Preview Section -->
+        {% if article %}
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-eye me-2"></i>Article Preview
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="preview-content">
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h4 class="fw-bold">{{ article.title }}</h4>
+                            <span class="badge bg-primary">
+                                <i class="fas fa-tag me-1"></i>{{ article.category.name }}
+                            </span>
+                        </div>
+                        {% if article.excerpt %}
+                            <div class="lead mb-3 p-3 bg-light rounded-3 border-start border-4 border-primary">
+                                <i class="fas fa-quote-left text-primary me-2"></i>
+                                {{ article.excerpt }}
+                            </div>
+                        {% endif %}
+                        <div class="text-muted mb-3">
+                            <small>
+                                <i class="fas fa-user me-1"></i>By {{ article.author.username }} | 
+                                <i class="fas fa-calendar me-1"></i>{{ article.created_at|date:"M d, Y" }}
+                            </small>
+                        </div>
+                        <div class="preview-actions">
+                            <a href="{% url 'article_detail' article.slug %}" class="btn btn-outline-primary" target="_blank">
+                                <i class="fas fa-external-link-alt me-2"></i>View Published Article
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        color: var(--text-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .input-group-text {
+        background: var(--light-bg);
+        border-right: none;
+    }
+
+    .input-group .form-control,
+    .input-group .form-select {
+        border-left: none;
+    }
+
+    .input-group .form-control:focus,
+    .input-group .form-select:focus {
+        border-left: none;
+        box-shadow: none;
+    }
+
+    .content-editor-wrapper {
+        border: 2px solid var(--border-color);
+        border-radius: 10px;
+        overflow: hidden;
+    }
+
+    .content-editor-wrapper:focus-within {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+    }
+
+    .form-actions {
+        background: var(--light-bg);
+        margin: 0 -1.5rem -1.5rem -1.5rem;
+        padding: 1.5rem;
+    }
+
+    .preview-content {
+        background: white;
+        border-radius: 10px;
+        padding: 1.5rem;
+    }
+
+    .preview-actions {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .btn {
+        border-radius: 10px;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .form-text {
+        color: var(--text-secondary);
+        font-size: 0.875rem;
+    }
+</style>
+
+<script>
+function previewArticle() {
+    // This would typically open a preview modal or new window
+    alert('Preview functionality would open a preview window here.');
+}
+
+// Auto-save functionality (basic implementation)
+let autoSaveTimer;
+document.getElementById('articleForm').addEventListener('input', function() {
+    clearTimeout(autoSaveTimer);
+    autoSaveTimer = setTimeout(function() {
+        console.log('Auto-saving...');
+        // Implement auto-save logic here
+    }, 2000);
+});
+</script>
+{% endblock %} 

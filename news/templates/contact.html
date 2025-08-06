@@ -1,0 +1,482 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Contact Us - College News Portal{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="contact-hero mb-5 p-5 rounded-4 shadow-lg" style="background: linear-gradient(120deg, #667eea 0%, #764ba2 60%, #f093fb 100%); color: #fff;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-7">
+                <h1 class="display-4 fw-bold mb-3">Get in Touch</h1>
+                <p class="lead mb-4">Have questions, suggestions, or want to contribute? We'd love to hear from you. Reach out to us and we'll get back to you as soon as possible.</p>
+            </div>
+            <div class="col-lg-5 text-center">
+                <img src="https://img.icons8.com/ios-filled/200/ffffff/secured-letter.png" alt="Contact Icon" class="img-fluid mb-3" style="max-height:180px;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="row">
+        <!-- Contact Form -->
+        <div class="col-lg-8 mb-4 mb-lg-0">
+            <div class="card border-0 shadow-sm p-4">
+                <h3 class="mb-3"><i class="fas fa-paper-plane me-2 text-primary"></i>Send us a Message</h3>
+                <p class="text-muted mb-4">Fill out the form below and we'll get back to you shortly.</p>
+                <form method="post" class="contact-form">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="name" class="form-label">Full Name *</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="email" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" required placeholder="Enter your email address">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject *</label>
+                        <select class="form-select form-select-lg" id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="General Inquiry">General Inquiry</option>
+                            <option value="Article Submission">Article Submission</option>
+                            <option value="Technical Support">Technical Support</option>
+                            <option value="Feedback">Feedback</option>
+                            <option value="Partnership">Partnership</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label for="message" class="form-label">Message *</label>
+                        <textarea class="form-control form-control-lg" id="message" name="message" rows="6" required placeholder="Tell us how we can help you..."></textarea>
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-paper-plane me-2"></i>Send Message
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="col-lg-4">
+            <div class="contact-info-card mb-4">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Contact Information
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h6>Email</h6>
+                            <p>govinda@collegenews.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h6>Phone</h6>
+                            <p>9860574553</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h6>Address</h6>
+                            <p>Kathmandu, Nepal</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h6>College Hours</h6>
+                            <p>Sunday - Friday<br>6:15 AM - 5:00 PM</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-share-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h6>Connect</h6>
+                            <div class="d-flex gap-2">
+                                <a href="https://x.com/Govinda94209904" class="btn btn-outline-dark btn-sm rounded-circle" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/govinda.bista.102361" class="btn btn-outline-primary btn-sm rounded-circle" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                                <a href="https://www.linkedin.com/in/govinda-bista-62b8a2263/" class="btn btn-outline-info btn-sm rounded-circle" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="https://www.instagram.com/bista________" class="btn btn-outline-danger btn-sm rounded-circle" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links-card">
+                <div class="card-header">
+                    <h4 class="mb-0">
+                        <i class="fas fa-link me-2"></i>Quick Links
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <div class="quick-link-item">
+                        <a href="{% url 'about' %}" class="quick-link">
+                            <i class="fas fa-info-circle me-2"></i>About Us
+                        </a>
+                    </div>
+                    <div class="quick-link-item">
+                        <a href="{% url 'home' %}" class="quick-link">
+                            <i class="fas fa-home me-2"></i>Home Page
+                        </a>
+                    </div>
+                    <div class="quick-link-item">
+                        <a href="{% url 'article_list' %}" class="quick-link">
+                            <i class="fas fa-newspaper me-2"></i>Browse Articles
+                        </a>
+                    </div>
+                    {% if not user.is_authenticated %}
+                        <div class="quick-link-item">
+                            <a href="{% url 'register' %}" class="quick-link">
+                                <i class="fas fa-user-plus me-2"></i>Register
+                            </a>
+                        </div>
+                        <div class="quick-link-item">
+                            <a href="{% url 'login' %}" class="quick-link">
+                                <i class="fas fa-sign-in-alt me-2"></i>Login
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ Section -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h2 class="section-title mb-4">Frequently Asked Questions</h2>
+            <p class="lead text-muted mb-5">Find answers to common questions about our platform.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq1">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                            How can I submit an article for publication?
+                        </button>
+                    </h2>
+                    <div id="collapse1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            To submit an article, please contact the administrator with your article proposal. Include your name, contact information, article title, topic, and a brief description of the content. We'll review your submission and get back to you.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq2">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                            How do I register for an account?
+                        </button>
+                    </h2>
+                    <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Click the "Register" button in the navigation menu and fill out the registration form with your details. Once registered, you can comment on articles and access additional features.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq3">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+                            Can I edit or delete my comments?
+                        </button>
+                    </h2>
+                    <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Yes, you can edit or delete your own comments. Look for the edit/delete options next to your comments. Only you and administrators can modify your comments.
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="faq4">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+                            How often is new content published?
+                        </button>
+                    </h2>
+                    <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We publish new content regularly, typically several times per week. Follow us to stay updated with the latest articles and announcements.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Hero Section */
+    .contact-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        padding: 4rem 0;
+        border-radius: 20px;
+        margin-bottom: 3rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .contact-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/><circle cx="50" cy="10" r="0.5" fill="white" opacity="0.1"/><circle cx="10" cy="60" r="0.5" fill="white" opacity="0.1"/><circle cx="90" cy="40" r="0.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+        opacity: 0.3;
+    }
+
+    .hero-image {
+        font-size: 8rem;
+        color: rgba(255, 255, 255, 0.3);
+    }
+
+    .hero-features {
+        margin-top: 2rem;
+    }
+
+    .feature-item {
+        margin-bottom: 0.5rem;
+    }
+
+    /* Contact Form Card */
+    .contact-form-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+        border: none;
+    }
+
+    .contact-form-card .card-header {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        color: white;
+        padding: 2rem;
+        border: none;
+    }
+
+    .contact-form-card .card-body {
+        padding: 2rem;
+    }
+
+    .form-control-lg, .form-select-lg {
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+    }
+
+    .form-control-lg:focus, .form-select-lg:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-lg {
+        border-radius: 15px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+    .btn-lg:hover {
+        transform: translateY(-2px);
+    }
+
+    /* Contact Info Card */
+    .contact-info-card, .quick-links-card {
+        background: white;
+        border-radius: 20px;
+        box-shadow: var(--card-shadow);
+        border: none;
+        overflow: hidden;
+    }
+
+    .contact-info-card .card-header, .quick-links-card .card-header {
+        background: var(--light-bg);
+        border-bottom: 1px solid var(--border-color);
+        padding: 1.5rem;
+        font-weight: 600;
+    }
+
+    .contact-info-card .card-body, .quick-links-card .card-body {
+        padding: 1.5rem;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: var(--light-bg);
+        border-radius: 15px;
+        transition: all 0.3s ease;
+    }
+
+    .contact-item:hover {
+        background: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .contact-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .contact-details h6 {
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+        color: var(--text-primary);
+    }
+
+    .contact-details p {
+        margin: 0;
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    /* Quick Links */
+    .quick-link-item {
+        margin-bottom: 0.75rem;
+    }
+
+    .quick-link-item:last-child {
+        margin-bottom: 0;
+    }
+
+    .quick-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem;
+        background: var(--light-bg);
+        border-radius: 10px;
+        color: var(--text-primary);
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+
+    .quick-link:hover {
+        background: var(--primary-color);
+        color: white;
+        transform: translateX(5px);
+    }
+
+    /* FAQ Section */
+    .section-title {
+        font-weight: 700;
+        color: var(--text-primary);
+        position: relative;
+        padding-bottom: 1rem;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+        border-radius: 2px;
+    }
+
+    .accordion-item {
+        border: none;
+        border-radius: 15px;
+        margin-bottom: 1rem;
+        box-shadow: var(--card-shadow);
+        overflow: hidden;
+    }
+
+    .accordion-button {
+        background: white;
+        border: none;
+        font-weight: 600;
+        color: var(--text-primary);
+        padding: 1.5rem;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+        color: white;
+        box-shadow: none;
+    }
+
+    .accordion-button:focus {
+        box-shadow: none;
+        border: none;
+    }
+
+    .accordion-body {
+        padding: 1.5rem;
+        color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .contact-hero {
+            padding: 2rem 0;
+        }
+
+        .hero-image {
+            font-size: 4rem;
+            margin-top: 2rem;
+        }
+
+        .contact-form-card .card-body,
+        .contact-info-card .card-body,
+        .quick-links-card .card-body {
+            padding: 1rem;
+        }
+
+        .contact-item {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .contact-icon {
+            margin-right: 0;
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+{% endblock %} 

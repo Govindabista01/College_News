@@ -1,0 +1,358 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Settings - College News Portal{% endblock %}
+
+{% block page_title %}Settings{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-gradient mb-3">
+                <i class="fas fa-cog text-primary me-3"></i>
+                Site Settings
+            </h1>
+            <p class="lead text-muted">Configure and manage your college news portal</p>
+        </div>
+
+        <!-- Site Overview -->
+        <div class="row g-4 mb-4">
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-newspaper"></i>
+                            </div>
+                            <div class="stat-content ms-3">
+                                <h3 class="stat-number">{{ total_articles }}</h3>
+                                <p class="stat-label mb-0">Total Articles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="stat-content ms-3">
+                                <h3 class="stat-number">{{ total_users }}</h3>
+                                <p class="stat-label mb-0">Registered Users</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-info">
+                                <i class="fas fa-tags"></i>
+                            </div>
+                            <div class="stat-content ms-3">
+                                <h3 class="stat-number">{{ total_categories }}</h3>
+                                <p class="stat-label mb-0">Categories</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-3">
+                <div class="card stat-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-server"></i>
+                            </div>
+                            <div class="stat-content ms-3">
+                                <h3 class="stat-number">v1.0</h3>
+                                <p class="stat-label mb-0">Version</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Site Information -->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-info-circle me-2"></i>Site Information
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Site Name</label>
+                            <input type="text" class="form-control" value="{{ site_name }}" readonly>
+                        </div>
+                        
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Site Description</label>
+                            <textarea class="form-control" rows="3" readonly>{{ site_description }}</textarea>
+                        </div>
+                        
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Contact Email</label>
+                            <input type="email" class="form-control" value="{{ contact_email }}" readonly>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label class="form-label fw-bold">Site URL</label>
+                            <input type="url" class="form-control" value="{{ request.build_absolute_uri|cut:request.path }}" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Management -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-users me-2"></i>User Management
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'user_list' %}" class="btn btn-primary">
+                                <i class="fas fa-users me-2"></i>Manage Users
+                            </a>
+                            <a href="{% url 'register' %}" class="btn btn-outline-primary">
+                                <i class="fas fa-user-plus me-2"></i>Create New User
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Settings -->
+            <div class="col-lg-6">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-cogs me-2"></i>System Settings
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Registration</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="allowRegistration" checked disabled>
+                                <label class="form-check-label" for="allowRegistration">
+                                    Allow new user registration
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Comments</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="autoApproveComments" checked disabled>
+                                <label class="form-check-label" for="autoApproveComments">
+                                    Auto-approve comments
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item mb-3">
+                            <label class="form-label fw-bold">Article Submission</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="adminOnlyArticles" checked disabled>
+                                <label class="form-check-label" for="adminOnlyArticles">
+                                    Only admins can create articles
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="setting-item">
+                            <label class="form-label fw-bold">Maintenance Mode</label>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="maintenanceMode" disabled>
+                                <label class="form-check-label" for="maintenanceMode">
+                                    Enable maintenance mode
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-bolt me-2"></i>Quick Actions
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-grid gap-2">
+                            <a href="{% url 'article_create' %}" class="btn btn-success">
+                                <i class="fas fa-plus me-2"></i>Create Article
+                            </a>
+                            <a href="{% url 'category_list' %}" class="btn btn-info">
+                                <i class="fas fa-tags me-2"></i>Manage Categories
+                            </a>
+                            <a href="{% url 'dashboard' %}" class="btn btn-outline-secondary">
+                                <i class="fas fa-tachometer-alt me-2"></i>Back to Dashboard
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- System Information -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-server me-2"></i>System Information
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">Platform</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-code me-2 text-primary"></i>
+                                <strong>Framework:</strong> Django 5.0.6
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-database me-2 text-success"></i>
+                                <strong>Database:</strong> SQLite
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-palette me-2 text-info"></i>
+                                <strong>UI Framework:</strong> Bootstrap 5.3.3
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h6 class="text-muted mb-3">Features</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                User Registration & Authentication
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                Article Management System
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                Comment System with Moderation
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                Like/Unlike Articles
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                Category Management
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check me-2 text-success"></i>
+                                Admin Dashboard
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stat-card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--hover-shadow);
+    }
+
+    .stat-icon {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .stat-number {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0;
+        color: var(--text-primary);
+    }
+
+    .stat-label {
+        color: var(--text-secondary);
+        font-size: 0.9rem;
+    }
+
+    .setting-item {
+        padding: 0.5rem 0;
+    }
+
+    .form-control[readonly] {
+        background-color: var(--light-bg);
+        border-color: var(--border-color);
+    }
+
+    .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: var(--card-shadow);
+    }
+
+    .card-header {
+        background: white;
+        border-bottom: 1px solid var(--border-color);
+        font-weight: 600;
+    }
+
+    .btn {
+        border-radius: 10px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .list-unstyled li {
+        padding: 0.25rem 0;
+    }
+
+    @media (max-width: 768px) {
+        .stat-card {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+{% endblock %} 

@@ -1,0 +1,128 @@
+{% extends 'base_home.html' %}
+
+{% block title %}Access Denied - College News Portal{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="text-center py-5">
+                <!-- Error Icon -->
+                <div class="error-icon mb-4">
+                    <i class="fas fa-lock fa-5x text-warning"></i>
+                </div>
+                
+                <!-- Error Message -->
+                <h1 class="display-4 fw-bold text-danger mb-3">403</h1>
+                <h2 class="h3 mb-4">Access Denied</h2>
+                
+                <div class="alert alert-warning mb-4">
+                    <h5 class="alert-heading">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Admin Access Required
+                    </h5>
+                    <p class="mb-0">
+                        This page is only accessible to administrators. Regular users can like, comment, and search articles, but article management is restricted to admin users.
+                    </p>
+                </div>
+                
+                <!-- What you can do -->
+                <div class="card mb-4">
+                    <div class="card-header bg-primary text-white">
+                        <h5 class="mb-0">
+                            <i class="fas fa-check-circle me-2"></i>What You Can Do
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row g-3">
+                            <div class="col-6">
+                                <div class="feature-item text-center">
+                                    <i class="fas fa-heart text-danger fa-2x mb-2"></i>
+                                    <h6>Like Articles</h6>
+                                    <small class="text-muted">Show your support</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature-item text-center">
+                                    <i class="fas fa-comment text-primary fa-2x mb-2"></i>
+                                    <h6>Comment</h6>
+                                    <small class="text-muted">Join discussions</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature-item text-center">
+                                    <i class="fas fa-search text-success fa-2x mb-2"></i>
+                                    <h6>Search</h6>
+                                    <small class="text-muted">Find articles</small>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="feature-item text-center">
+                                    <i class="fas fa-envelope text-warning fa-2x mb-2"></i>
+                                    <h6>Submit Request</h6>
+                                    <small class="text-muted">Contact admin</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                    <a href="{% url 'home' %}" class="btn btn-primary btn-lg">
+                        <i class="fas fa-home me-2"></i>Go Home
+                    </a>
+                    <button type="button" class="btn btn-outline-primary btn-lg" data-bs-toggle="modal" data-bs-target="#contactAdminModal">
+                        <i class="fas fa-envelope me-2"></i>Submit Article Request
+                    </button>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="mt-4">
+                    <p class="text-muted mb-0">
+                        Need admin access? Contact the administrator at 
+                        <a href="mailto:admin@collegenews.com" class="text-decoration-none">admin@collegenews.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-icon {
+        animation: bounce 2s infinite;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0);
+        }
+        40% {
+            transform: translateY(-10px);
+        }
+        60% {
+            transform: translateY(-5px);
+        }
+    }
+    
+    .feature-item {
+        padding: 1rem;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+        background: var(--light-bg);
+        transform: translateY(-2px);
+    }
+    
+    .feature-item h6 {
+        margin: 0.5rem 0 0.25rem;
+        font-weight: 600;
+    }
+    
+    .feature-item small {
+        font-size: 0.8rem;
+    }
+</style>
+{% endblock %} 

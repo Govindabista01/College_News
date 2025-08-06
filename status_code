@@ -1,0 +1,15 @@
+HTTP Status Code(most common)
+200 - OK - request is successful, response containsthe desired data
+201 - CREATED - Resource created successfully
+204 - NO Content - request is successful but content returned in response
+301 - Moved permanently - resources has been premanently moved to new url
+302 - found/temporary redirect - redirects (example login)
+400 - bad request - client send invalid or incomplete data
+401 - Unauthorized - Authentication Needed
+403 - forbidden - authenticated but not allowwed to access resources
+404 - Not Found - requested resources does not exist
+405 - MEthod NOt allowwed - in api endpoint given method (post, get, etc) is not allowwed
+
+
+
+

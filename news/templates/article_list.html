@@ -1,0 +1,327 @@
+{% extends 'base_dashboard.html' %}
+
+{% block title %}Manage Articles - College News Portal{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <!-- Header Section -->
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-gradient mb-3">
+                <i class="fas fa-newspaper text-primary me-3"></i>
+                Manage Articles
+            </h1>
+            <p class="lead text-muted">Create, edit, and manage your articles</p>
+        </div>
+
+        <!-- Action Bar -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div class="stats-summary">
+                <span class="badge bg-primary me-2">
+                    <i class="fas fa-file-alt me-1"></i>{{ page_obj.paginator.count|default:0 }} Total
+                </span>
+                <span class="badge bg-success me-2">
+                    <i class="fas fa-check me-1"></i>{{ page_obj|length }} Showing
+                </span>
+            </div>
+            <a href="{% url 'article_create' %}" class="btn btn-primary">
+                <i class="fas fa-plus me-2"></i>New Article
+            </a>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-search me-2"></i>Search & Filter
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="get" class="row g-3">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-search"></i>
+                            </span>
+                            <input type="text" name="q" class="form-control" placeholder="Search articles..." value="{{ query|default:'' }}">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-text">
+                                <i class="fas fa-filter"></i>
+                            </span>
+                            <select name="status" class="form-select">
+                                <option value="">All Status</option>
+                                <option value="draft" {% if selected_status == 'draft' %}selected{% endif %}>Draft</option>
+                                <option value="published" {% if selected_status == 'published' %}selected{% endif %}>Published</option>
+                                <option value="archived" {% if selected_status == 'archived' %}selected{% endif %}>Archived</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-search me-2"></i>Filter
+                        </button>
+                    </div>
+                    <div class="col-md-2">
+                        <a href="{% url 'article_list' %}" class="btn btn-outline-secondary w-100">
+                            <i class="fas fa-times me-2"></i>Clear
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Articles Table -->
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-list me-2"></i>Articles List
+                </h5>
+            </div>
+            <div class="card-body p-0">
+                {% if page_obj %}
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th class="border-0">
+                                        <i class="fas fa-heading me-2"></i>Title
+                                    </th>
+                                    <th class="border-0">
+                                        <i class="fas fa-tag me-2"></i>Category
+                                    </th>
+                                    <th class="border-0">
+                                        <i class="fas fa-info-circle me-2"></i>Status
+                                    </th>
+                                    <th class="border-0">
+                                        <i class="fas fa-eye me-2"></i>Views
+                                    </th>
+                                    <th class="border-0">
+                                        <i class="fas fa-calendar me-2"></i>Created
+                                    </th>
+                                    <th class="border-0">
+                                        <i class="fas fa-cogs me-2"></i>Actions
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for article in page_obj %}
+                                    <tr class="article-row">
+                                        <td>
+                                            <div class="article-info">
+                                                <a href="{% url 'article_detail' article.slug %}" class="text-decoration-none fw-bold article-title">
+                                                    {{ article.title }}
+                                                </a>
+                                                {% if article.excerpt %}
+                                                    <div class="article-excerpt">
+                                                        <small class="text-muted">{{ article.excerpt|truncatewords:15 }}</small>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge bg-secondary">
+                                                <i class="fas fa-folder me-1"></i>{{ article.category.name }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            {% if article.status == 'published' %}
+                                                <span class="badge bg-success">
+                                                    <i class="fas fa-check me-1"></i>Published
+                                                </span>
+                                            {% elif article.status == 'draft' %}
+                                                <span class="badge bg-warning">
+                                                    <i class="fas fa-edit me-1"></i>Draft
+                                                </span>
+                                            {% else %}
+                                                <span class="badge bg-secondary">
+                                                    <i class="fas fa-archive me-1"></i>Archived
+                                                </span>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <span class="views-count">
+                                                <i class="fas fa-eye me-1"></i>{{ article.views }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <small class="text-muted">
+                                                <i class="fas fa-calendar-day me-1"></i>{{ article.created_at|date:"M d, Y" }}
+                                            </small>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group">
+                                                <a href="{% url 'article_update' article.slug %}" class="btn btn-outline-primary btn-sm" title="Edit">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                                <a href="{% url 'article_detail' article.slug %}" class="btn btn-outline-info btn-sm" title="View" target="_blank">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="{% url 'article_delete' article.slug %}" class="btn btn-outline-danger btn-sm" title="Delete">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Pagination -->
+                    {% if page_obj.has_other_pages %}
+                        <div class="card-footer">
+                            <nav aria-label="Page navigation">
+                                <ul class="pagination justify-content-center mb-0">
+                                    {% if page_obj.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page=1{% if query %}&q={{ query }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">
+                                                <i class="fas fa-angle-double-left"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">
+                                                <i class="fas fa-angle-left"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+
+                                    <li class="page-item active">
+                                        <span class="page-link">
+                                            <i class="fas fa-file-alt me-1"></i>
+                                            {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                                        </span>
+                                    </li>
+
+                                    {% if page_obj.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if query %}&q={{ query }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">
+                                                <i class="fas fa-angle-right"></i>
+                                            </a>
+                                        </li>
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if query %}&q={{ query }}{% endif %}{% if selected_status %}&status={{ selected_status }}{% endif %}">
+                                                <i class="fas fa-angle-double-right"></i>
+                                            </a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="text-center py-5">
+                        <i class="fas fa-newspaper fa-4x text-muted mb-4"></i>
+                        <h4 class="text-muted mb-3">No articles found</h4>
+                        <p class="text-muted mb-4">
+                            {% if query or selected_status %}
+                                No articles match your search criteria.
+                            {% else %}
+                                You haven't created any articles yet.
+                            {% endif %}
+                        </p>
+                        <a href="{% url 'article_create' %}" class="btn btn-primary btn-lg">
+                            <i class="fas fa-plus me-2"></i>Create Your First Article
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .text-gradient {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .stats-summary {
+        display: flex;
+        align-items: center;
+    }
+
+    .article-row {
+        transition: all 0.3s ease;
+    }
+
+    .article-row:hover {
+        background-color: var(--light-bg);
+        transform: translateX(5px);
+    }
+
+    .article-info {
+        max-width: 300px;
+    }
+
+    .article-title {
+        color: var(--text-primary);
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    .article-title:hover {
+        color: var(--primary-color);
+    }
+
+    .article-excerpt {
+        margin-top: 0.25rem;
+        line-height: 1.3;
+    }
+
+    .views-count {
+        font-weight: 500;
+        color: var(--text-secondary);
+    }
+
+    .table th {
+        font-weight: 600;
+        color: var(--text-secondary);
+        border-bottom: 2px solid var(--border-color);
+        padding: 1rem 1.5rem;
+    }
+
+    .table td {
+        vertical-align: middle;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 1.5rem;
+    }
+
+    .btn-group .btn {
+        border-radius: 8px;
+        margin: 0 0.125rem;
+        padding: 0.5rem 0.75rem;
+        transition: all 0.3s ease;
+    }
+
+    .btn-group .btn:hover {
+        transform: translateY(-2px);
+    }
+
+    .card-footer {
+        background: var(--light-bg);
+        border-top: 1px solid var(--border-color);
+        padding: 1rem 1.5rem;
+    }
+
+    .input-group-text {
+        background: var(--light-bg);
+        border-right: none;
+    }
+
+    .input-group .form-control,
+    .input-group .form-select {
+        border-left: none;
+    }
+
+    .input-group .form-control:focus,
+    .input-group .form-select:focus {
+        border-left: none;
+        box-shadow: none;
+    }
+</style>
+{% endblock %} 

@@ -1,0 +1,302 @@
+/* --- Custom About & Contact Page Enhancements --- */
+.about-hero, .contact-hero {
+    margin-bottom: 3rem;
+    padding: 4rem 0 3rem 0;
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10);
+    background: linear-gradient(120deg, #667eea 0%, #764ba2 60%, #f093fb 100%);
+    color: #fff;
+}
+.about-hero .container, .contact-hero .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+.about-hero h1, .contact-hero h1 {
+    letter-spacing: -1px;
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+}
+.about-hero p.lead, .contact-hero p.lead {
+    font-size: 1.25rem;
+    opacity: 0.95;
+}
+.about-hero img, .contact-hero img {
+    filter: drop-shadow(0 8px 32px rgba(102, 126, 234, 0.18));
+    border-radius: 1.5rem;
+}
+.card, .team-card, .feature-card, .contact-form-card, .contact-info-card {
+    border-radius: 1.5rem !important;
+    box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
+    transition: transform 0.18s cubic-bezier(.4,2,.6,1), box-shadow 0.18s;
+    background: #fff;
+}
+.card:hover, .team-card:hover, .feature-card:hover, .contact-form-card:hover, .contact-info-card:hover {
+    transform: translateY(-6px) scale(1.025);
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.16);
+}
+.feature-card i, .team-card i {
+    transition: color 0.2s, transform 0.2s;
+}
+.feature-card:hover i, .team-card:hover i {
+    transform: scale(1.2) rotate(-6deg);
+    color: #764ba2 !important;
+}
+.feature-card, .team-card {
+    background: #fff;
+    padding: 2.2rem 1.2rem 1.5rem 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.about-image img {
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
+}
+.cta-section {
+    background: linear-gradient(90deg, #667eea 0%, #f093fb 100%);
+    border-radius: 1.5rem;
+    padding: 2.5rem 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 24px rgba(102, 126, 234, 0.10);
+}
+.cta-section h2, .cta-section p {
+    color: #fff !important;
+}
+.cta-buttons .btn {
+    margin: 0.5rem 0.5rem 0 0;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    padding: 0.8rem 2.2rem;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+    transition: all 0.2s;
+}
+.cta-buttons .btn-light {
+    background: #fff;
+    color: #764ba2;
+    border: none;
+}
+.cta-buttons .btn-outline-light {
+    border: 2px solid #fff;
+    color: #fff;
+    background: transparent;
+}
+.cta-buttons .btn-light:hover, .cta-buttons .btn-outline-light:hover {
+    background: #764ba2;
+    color: #fff;
+    border-color: #764ba2;
+}
+.contact-form-card, .contact-info-card {
+    margin-bottom: 2rem;
+}
+.contact-form-card form .form-control, .contact-form-card form .form-select {
+    border-radius: 0.8rem;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+}
+.contact-form-card form .btn {
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.9rem 2.2rem;
+}
+.contact-info-card .contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+}
+.contact-info-card .contact-icon {
+    font-size: 1.5rem;
+    color: #667eea;
+    background: #f3f6fd;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.quick-links-card {
+    border-radius: 1.2rem;
+    background: #f8f9fa;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.06);
+    padding: 1.2rem;
+}
+.quick-link {
+    color: #667eea;
+    font-weight: 500;
+    text-decoration: none;
+    transition: color 0.18s;
+}
+.quick-link:hover {
+    color: #764ba2;
+    text-decoration: underline;
+}
+/* Hero Section Styles */
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0 1.2rem 0;
+    margin-top: 0 !important;
+    background: linear-gradient(120deg, #667eea 0%, #764ba2 60%, #f093fb 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 180px;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.10);
+    width: 90vw;
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 3px solid #764ba2;
+    border-radius: 2.5rem;
+}
+.hero-bg-shape {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 110px;
+    background: radial-gradient(circle at 60% 40%, #fff 0%, #f093fb 60%, transparent 100%);
+    opacity: 0.10;
+    z-index: 1;
+    border-radius: 50% 50% 40% 40% / 60% 60% 40% 40%;
+    pointer-events: none;
+}
+.hero-bottom-curve {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    width: 100%;
+    z-index: 2;
+    line-height: 0;
+}
+.hero-bottom-curve svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+.hero-card {
+    position: relative;
+    z-index: 3;
+    background: rgba(255,255,255,0.97);
+    border-radius: 2rem;
+    box-shadow: 0 8px 32px rgba(102, 126, 234, 0.13);
+    padding: 2rem 1.2rem 1.5rem 1.2rem;
+    max-width: 600px;
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+}
+.hero-icon {
+    font-size: 3.5rem;
+    color: #667eea;
+    background: #f3f6fd;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem auto;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+}
+.hero-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2d2d2d;
+    margin-bottom: 1rem;
+}
+.hero-description {
+    font-size: 1.15rem;
+    color: #555;
+    margin-bottom: 2rem;
+    font-weight: 400;
+}
+.hero-actions .btn {
+    border-radius: 2rem;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.9rem 2.2rem;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.08);
+    transition: all 0.2s;
+}
+.hero-actions .btn-primary {
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    color: #fff;
+}
+.hero-actions .btn-primary:hover {
+    background: linear-gradient(90deg, #764ba2 0%, #667eea 100%);
+    color: #fff;
+}
+.hero-actions .btn-outline-primary {
+    border: 2px solid #667eea;
+    color: #667eea;
+    background: #fff;
+}
+.hero-actions .btn-outline-primary:hover {
+    background: #667eea;
+    color: #fff;
+    border-color: #667eea;
+}
+@media (max-width: 768px) {
+    .hero-section {
+        min-height: 110px;
+        padding-bottom: 0.5rem;
+        width: 98vw;
+        border-radius: 1.2rem;
+    }
+    .hero-bg-shape {
+        width: 200px;
+        height: 55px;
+        top: -10px;
+    }
+    .hero-card {
+        padding: 1.2rem 0.7rem 1rem 0.7rem;
+        max-width: 98vw;
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .hero-title {
+        font-size: 2rem;
+    }
+    .hero-icon {
+        font-size: 2.2rem;
+        width: 60px;
+        height: 60px;
+    }
+    .hero-bottom-curve svg {
+        height: 50px;
+    }
+}
+@media (max-width: 480px) {
+    .hero-section {
+        min-height: 60px;
+        padding-bottom: 0.2rem;
+        width: 99vw;
+        border-radius: 0.7rem;
+    }
+    .hero-bg-shape {
+        width: 90px;
+        height: 20px;
+        top: -4px;
+    }
+    .hero-card {
+        padding: 0.7rem 0.3rem 0.7rem 0.3rem;
+        max-width: 99vw;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    .hero-title {
+        font-size: 1.3rem;
+    }
+    .hero-icon {
+        font-size: 1.3rem;
+        width: 40px;
+        height: 40px;
+    }
+    .hero-bottom-curve svg {
+        height: 30px;
+    }
+} 
